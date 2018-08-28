@@ -52,7 +52,7 @@ ffi = create_extension(
 ffi = ffi.distutils_extension()
 setup(
     name="warpctc_pytorch",
-    version="0.1",
+    version="0.1.1",
     description="PyTorch wrapper for warp-ctc",
     url="https://github.com/baidu-research/warp-ctc",
     author="Jared Casper, Sean Naren",
