@@ -54,9 +54,12 @@ cost.backward()
 ## Documentation
 
 ```
-CTCLoss(size_average=False, length_average=False)
+CTCLoss(size_average=False, length_average=False, reduce=True)
     # size_average (bool): normalize the loss by the batch size (default: False)
     # length_average (bool): normalize the loss by the total number of frames in the batch. If True, supersedes size_average (default: False)
+    # reduce (bool): average or sum over observation for each minibatch.
+        If `False`, returns a loss per batch element instead and ignores `average` options.
+        (default: `True`)
 
 forward(acts, labels, act_lens, label_lens)
     # acts: Tensor of (seqLength x batch x outputDim) containing output activations from network (before softmax)
