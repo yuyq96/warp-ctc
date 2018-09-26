@@ -14,7 +14,7 @@ def _assert_no_grad(tensor):
         "mark other tensors as not requiring gradients"
 
 
-class _CTC(Function):
+class _CTC_reduce(Function):
     @staticmethod
     def forward(ctx, acts, labels, act_lens, label_lens, size_average=False,
                 length_average=False, blank=0):
@@ -52,6 +52,46 @@ class _CTC(Function):
     def backward(ctx, grad_output):
         return ctx.grads * grad_output.to(ctx.grads.device), None, None, None, None, None, None
 
+class _CTC_irreduce(Function):
+    @staticmethod
+    def forward(ctx, acts, labels, act_lens, label_lens, size_average=False,
+                length_average=False, blank=0):
+        is_cuda = True if acts.is_cuda else False
+        acts = acts.contiguous()
+        loss_func = warp_ctc.gpu_ctc if is_cuda else warp_ctc.cpu_ctc
+        grads = torch.zeros(acts.size()).type_as(acts)
+        minibatch_size = acts.size(1)
+        costs = torch.zeros(minibatch_size).cpu()
+        loss_func(acts,
+                  grads,
+                  labels,
+                  label_lens,
+                  act_lens,
+                  minibatch_size,
+                  costs,
+                  blank)
+
+        costs = costs.unsqueeze(1)  # Make the costs size be B x 1, then grad_output is also B x 1
+                                    # Thus the `grad_output' in backward() is broadcastable
+        #costs = torch.FloatTensor([costs.sum()])
+
+        #if length_average:
+        #    # Compute the avg. log-probability per batch sample and frame.
+        #    total_length = torch.sum(act_lens).item()
+        #    grads = grads / total_length
+        #    costs = costs / total_length
+        #elif size_average:
+        #    # Compute the avg. log-probability per batch sample.
+        #    grads = grads / minibatch_size
+        #    costs = costs / minibatch_size
+
+        ctx.grads = grads
+        return costs
+
+    @staticmethod
+    def backward(ctx, grad_output):
+        return ctx.grads * grad_output.to(ctx.grads.device), None, None, None, None, None, None
+
 class CTCLoss(Module):
     """
     Parameters:
@@ -60,13 +100,20 @@ class CTCLoss(Module):
         length_average (bool): normalize the loss by the total number of frames
             in the batch. If `True`, supersedes `size_average`
             (default: `False`)
+        reduce (bool): average or sum over observation for each minibatch.
+            If `False`, returns a loss per batch element instead and ignores `average` options.
+            (default: `True`)
     """
-    def __init__(self, blank=0, size_average=False, length_average=False):
+    def __init__(self, blank=0, size_average=False, length_average=False, reduce=True):
         super(CTCLoss, self).__init__()
-        self.ctc = _CTC.apply
+        if reduce:
+            self.ctc = _CTC_reduce.apply
+        else:
+            self.ctc = _CTC_irreduce.apply
         self.blank = blank
         self.size_average = size_average
         self.length_average = length_average
+        self.reduce = reduce
 
     def forward(self, acts, labels, act_lens, label_lens):
         """
