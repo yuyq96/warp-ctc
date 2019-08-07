@@ -1,5 +1,6 @@
 import os
 import platform
+import shutil
 import sys
 from setuptools import setup, find_packages
 
@@ -7,22 +8,32 @@ from torch.utils.cpp_extension import BuildExtension, CppExtension
 import torch
 
 extra_compile_args = ['-std=c++11', '-fPIC']
-warp_ctc_path = "../build"
+warp_ctc_build_path = "../build"
 
 if platform.system() == 'Darwin':
     lib_ext = ".dylib"
 else:
     lib_ext = ".so"
+warp_ctc_libname = 'libwarpctc{}'.format(lib_ext)
 
 if "WARP_CTC_PATH" in os.environ:
-    warp_ctc_path = os.environ["WARP_CTC_PATH"]
-if not os.path.exists(os.path.join(warp_ctc_path, "libwarpctc" + lib_ext)):
-    print(("Could not find libwarpctc.so in {}.\n"
+    warp_ctc_build_path = os.environ["WARP_CTC_PATH"]
+if not os.path.exists(os.path.join(warp_ctc_build_path, warp_ctc_libname)):
+    print(("Could not find {libname} in {build_path}.\n"
            "Build warp-ctc and set WARP_CTC_PATH to the location of"
-           " libwarpctc.so (default is '../build')").format(warp_ctc_path))
+           " {libname} (default is '../build')").format(
+               libname=warp_ctc_libname, build_path=warp_ctc_build_path))
     sys.exit(1)
 
 include_dirs = [os.path.realpath('../include')]
+
+warp_ctc_libpath = "./warpctc_pytorch/lib"
+if not os.path.isdir(warp_ctc_libpath):
+    os.mkdir(warp_ctc_libpath)
+shutil.copyfile(
+    '{}/{}'.format(warp_ctc_build_path, warp_ctc_libname),
+    '{}/{}'.format(warp_ctc_libpath, warp_ctc_libname)
+)
 
 if torch.cuda.is_available() or "CUDA_HOME" in os.environ:
     enable_gpu = True
@@ -44,9 +55,9 @@ ext_modules = [
         language='c++',
         sources=['src/binding.cpp'],
         include_dirs=include_dirs,
-        library_dirs=[os.path.realpath(warp_ctc_path)],
+        library_dirs=[os.path.realpath(warp_ctc_libpath)],
         libraries=['warpctc'],
-        extra_link_args=['-Wl,-rpath,' + os.path.realpath(warp_ctc_path)],
+        extra_link_args=['-Wl,-rpath,{}'.format('$ORIGIN/lib')],
         extra_compile_args=extra_compile_args
     )
 ]
@@ -60,6 +71,7 @@ setup(
     author_email="jared.casper@baidu.com, sean.narenthiran@digitalreasoning.com",
     license="Apache",
     packages=find_packages(),
+    package_data={'': ['lib/{}'.format(warp_ctc_libname)]},
     ext_modules=ext_modules,
     cmdclass={'build_ext': BuildExtension}
 )

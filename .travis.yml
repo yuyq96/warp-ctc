@@ -30,6 +30,10 @@ script:
     'source activate test-environment && cd pytorch_binding && py.test tests'
   - docker exec warpctc_builder_container /bin/bash -cl \
     'source activate test-environment && cd pytorch_binding && py.test --pep8 -m pep8 --ignore=warpctc_pytorch/_warp_ctc'
+  - docker exec warpctc_builder_container /bin/bash -cl \
+    'source activate test-environment && cd pytorch_binding && python setup.py bdist_wheel'
+  - docker exec warpctc_builder_container /bin/bash -cl \
+    'ls -1 pytorch_binding/dist/*.whl | awk "{print \"mv \"\$1\" \"\$1}" | sed "s/-linux_/-manylinux1_/2" | bash'
 
 after_script:
   - docker stop warpctc_builder_container
