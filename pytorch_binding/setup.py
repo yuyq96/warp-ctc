@@ -3,6 +3,7 @@ import platform
 import shutil
 import sys
 from setuptools import setup, find_packages
+from subprocess import Popen, PIPE
 
 from torch.utils.cpp_extension import BuildExtension, CppExtension
 import torch
@@ -49,6 +50,21 @@ if enable_gpu:
 else:
     build_extension = CppExtension
 
+
+def get_cuda_version():
+    proc = Popen(['nvcc', '--version'], stdout=PIPE, stderr=PIPE)
+    out, err = proc.communicate()
+    out.decode('utf-8').split('\n')[-2].split(', ')[-2].split(' ')
+    return out.decode('utf-8').split()[-2][:-1].replace('.', '')
+
+
+def get_torch_version():
+    return torch.__version__.replace('.', '')
+
+
+package_name = 'warpctc_pytorch{}_cuda{}'.format(
+    get_torch_version(), get_cuda_version())
+
 ext_modules = [
     build_extension(
         name='warpctc_pytorch._warp_ctc',
@@ -63,7 +79,7 @@ ext_modules = [
 ]
 
 setup(
-    name="warpctc_pytorch",
+    name=package_name,
     version="0.1.1",
     description="PyTorch wrapper for warp-ctc",
     url="https://github.com/baidu-research/warp-ctc",
