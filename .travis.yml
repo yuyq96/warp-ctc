@@ -3,37 +3,32 @@ dist: xenial
 language: python
 services:
   - docker
-python:
-  - "3.6"
-  - "3.7"
 env:
-  - TORCH_VERSION=1.0.0 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda101
+  - PYTHON_VERSION=3.6.9 TORCH_VERSION=1.0.0 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda101
+  - PYTHON_VERSION=3.7.4 TORCH_VERSION=1.0.0 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda101
 before_install:
   - docker pull $DOCKER_IMAGE_NAME
   - docker run --rm -d --name warpctc_builder_container -v ${PWD}:${PWD} -w ${PWD} $DOCKER_IMAGE_NAME sleep inf
 install:
-  - docker exec -e PYTHON_VERSION=$TRAVIS_PYTHON_VERSION warpctc_builder_container /bin/bash -cl \
-    'conda create -q -n test-environment python=$PYTHON_VERSION pytest pytest-pep8'
-  - docker exec -e TORCH_VERSION=$TORCH_VERSION warpctc_builder_container /bin/bash -cl \
-    'source activate test-environment && conda install pytorch==$TORCH_VERSION torchvision -c pytorch'
-  # Useful for debugging any issues with conda
+  - docker exec -e PYTHON_VERSION=$PYTHON_VERSION warpctc_builder_container /bin/bash -cl \
+    'pyenv global $PYTHON_VERSION'
   - docker exec warpctc_builder_container /bin/bash -cl \
-    'source activate test-environment && conda info -a'
+    'pip install -U pip setuptools && pip install pytest pytest-pep8 wheel'
+  - docker exec -e TORCH_VERSION=$TORCH_VERSION warpctc_builder_container /bin/bash -cl \
+    'pip install torch==$TORCH_VERSION torchvision'
 
   - docker exec warpctc_builder_container /bin/bash -cl \
-    'mkdir build && cd build && cmake .. && make && make install && ldconfig'
+    'mkdir build && cd build && cmake .. && make'
   - docker exec warpctc_builder_container /bin/bash -cl \
-    'source activate test-environment && cd pytorch_binding && python setup.py install && ldconfig'
+    'cd pytorch_binding && python setup.py bdist_wheel && pip install dist/*.whl'
 
 script:
   - docker exec warpctc_builder_container /bin/bash -cl \
-    'source activate test-environment && cd pytorch_binding && py.test tests'
+    'cd pytorch_binding && py.test tests'
   - docker exec warpctc_builder_container /bin/bash -cl \
-    'source activate test-environment && cd pytorch_binding && py.test --pep8 -m pep8 --ignore=warpctc_pytorch/_warp_ctc'
+    'cd pytorch_binding && py.test --pep8 -m pep8 --ignore=warpctc_pytorch/_warp_ctc'
   - docker exec warpctc_builder_container /bin/bash -cl \
-    'source activate test-environment && cd pytorch_binding && python setup.py bdist_wheel'
-  - docker exec warpctc_builder_container /bin/bash -cl \
-    'ls -1 pytorch_binding/dist/*.whl | awk "{print \"mv \"\$1\" \"\$1}" | sed "s/-linux_/-manylinux1_/2" | bash'
+    'cd pytorch_binding && ls -1 dist/*.whl | awk "{print \"mv \"\$1\" \"\$1}" | sed "s/-linux_/-manylinux1_/2" | bash && ls dist/'
 
 after_script:
   - docker stop warpctc_builder_container
