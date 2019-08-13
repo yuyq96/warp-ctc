@@ -13,6 +13,7 @@ def _assert_no_grad(tensor):
         "gradients only computed for acts - please " \
         "mark other tensors as not requiring gradients"
 
+
 class _CTC(Function):
     @staticmethod
     def forward(ctx, acts, labels, act_lens, label_lens, size_average=False,
@@ -45,8 +46,9 @@ class _CTC(Function):
                 grads = grads / minibatch_size
                 costs = costs / minibatch_size
         else:
-            costs = costs.unsqueeze(1) # Make the costs size be B x 1, then grad_output is also B x 1
-                                       # Thus the `grad_output' in backward() is broadcastable
+            # Make the costs size be B x 1, then grad_output is also B x 1
+            # Thus the `grad_output' in backward() is broadcastable
+            costs = costs.unsqueeze(1)
 
         ctx.grads = grads
         return costs
