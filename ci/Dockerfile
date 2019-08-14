@@ -1,4 +1,5 @@
-FROM nvidia/cuda:10.1-cudnn7-devel-centos7
+ARG base_image
+FROM ${base_image}
 
 ENV CUDA_HOME /usr/local/cuda
 
