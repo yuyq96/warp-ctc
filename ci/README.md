@@ -1,8 +1,12 @@
 Docker image builder for Travis CI
 ===
 
-This directory contains tools to build Docker images used in Travis CI.
-The tools build images by CUDA versions (9.2, 10.1), whose name is `espnet/warpctc_builder:cudaXX` (`XX` is CUDA version without `.`).
+This directory contains tools to build following Docker images used in Travis CI,
+
+- `espnet/warpctc_builder:cuda101` for CUDA 10.1
+- `espnet/warpctc_builder:cuda92` for CUDA 9.2
+- `espnet/warpctc_builder:cpu` for no CUDA environment
+
 
 ## Building Docker images
 
@@ -17,7 +21,7 @@ $ ./build.sh
 Run `docker push`.
 
 ```console
-$ docker push espnet/warpctc_builder:cudaXX
+$ docker push espnet/warpctc_builder:TAG
 ```
 
 Note that your Dockerhub account have write access to [espnet/warpctc_builder](https://hub.docker.com/r/espnet/warpctc_builder) repository.

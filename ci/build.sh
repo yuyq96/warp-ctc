@@ -7,6 +7,12 @@ for cuda_version in ${cuda_versions[@]}; do
   image_tag=cuda${cuda_version/./}
   image_name=$image_repository:$image_tag
   echo "Building $image_name"
-  docker build --build-arg base_image=$base_image -t $image_name .
-  echo Done.
+  docker build --build-arg base_image=$base_image -t $image_name ./gpu
+  echo "Done.\n"
 done
+
+image_tag=cpu
+image_name=$image_repository:$image_tag
+echo "Building $image_name"
+docker build -t $image_name ./cpu
+echo Done.
