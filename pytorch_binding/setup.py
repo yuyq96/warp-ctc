@@ -36,20 +36,6 @@ shutil.copyfile(
     '{}/{}'.format(warp_ctc_libpath, warp_ctc_libname)
 )
 
-if torch.cuda.is_available() or "CUDA_HOME" in os.environ:
-    enable_gpu = True
-else:
-    print("Torch was not built with CUDA support, not building warp-ctc GPU extensions.")
-    enable_gpu = False
-
-if enable_gpu:
-    from torch.utils.cpp_extension import CUDAExtension
-
-    build_extension = CUDAExtension
-    extra_compile_args += ['-DWARPCTC_ENABLE_GPU']
-else:
-    build_extension = CppExtension
-
 
 def get_cuda_version():
     proc = Popen(['nvcc', '--version'], stdout=PIPE, stderr=PIPE)
@@ -62,8 +48,22 @@ def get_torch_version():
     return torch.__version__.replace('.', '')
 
 
-package_name = 'warpctc_pytorch{}_cuda{}'.format(
-    get_torch_version(), get_cuda_version())
+if torch.cuda.is_available() or "CUDA_HOME" in os.environ:
+    enable_gpu = True
+else:
+    print("Torch was not built with CUDA support, not building warp-ctc GPU extensions.")
+    enable_gpu = False
+
+if enable_gpu:
+    from torch.utils.cpp_extension import CUDAExtension
+
+    build_extension = CUDAExtension
+    extra_compile_args += ['-DWARPCTC_ENABLE_GPU']
+    package_name = 'warpctc_pytorch{}_cuda{}'.format(
+        get_torch_version(), get_cuda_version())
+else:
+    build_extension = CppExtension
+    package_name = 'warpctc_pytorch{}_cpu'.format(get_torch_version())
 
 ext_modules = [
     build_extension(
