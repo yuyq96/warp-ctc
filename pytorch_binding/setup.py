@@ -45,7 +45,7 @@ def get_cuda_version():
 
 
 def get_torch_version():
-    major_ver, minor_ver, _ = torch.__version__.split('.')
+    major_ver, minor_ver = torch.__version__.split('.')[:2]
     return major_ver + minor_ver
 
 
