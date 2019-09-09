@@ -45,7 +45,8 @@ def get_cuda_version():
 
 
 def get_torch_version():
-    return torch.__version__.replace('.', '')
+    major_ver, minor_ver, _ = torch.__version__.split('.')
+    return major_ver + minor_ver
 
 
 if torch.cuda.is_available() or "CUDA_HOME" in os.environ:
