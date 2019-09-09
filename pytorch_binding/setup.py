@@ -81,10 +81,22 @@ ext_modules = [
 setup(
     name=package_name,
     version="0.1.1",
-    description="PyTorch wrapper for warp-ctc",
-    url="https://github.com/baidu-research/warp-ctc",
-    author="Jared Casper, Sean Naren",
-    author_email="jared.casper@baidu.com, sean.narenthiran@digitalreasoning.com",
+    description="Pytorch Bindings for warp-ctc maintained by ESPnet",
+    url="https://github.com/espnet/warp-ctc",
+    author=[
+        "Jared Casper",
+        "Sean Naren",
+        "Shinji Watanabe",
+        "Jiro Nishitoba",
+        "Yusuke Nishioka"
+    ],
+    author_email=[
+        "jared.casper@baidu.com",
+        "sean.narenthiran@digitalreasoning.com",
+        "sw005320@gmail.com",
+        "j.nshtb+github@gmail.com",
+        "yusuke.nishioka.0713@gmail.com"
+    ],
     license="Apache",
     packages=find_packages(),
     package_data={'': ['lib/{}'.format(warp_ctc_libname)]},
