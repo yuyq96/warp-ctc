@@ -4,8 +4,14 @@ language: python
 services:
   - docker
 env:
+  - PYTHON_VERSION=3.6.9 TORCH_VERSION=1.0.0 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda90
+  - PYTHON_VERSION=3.7.4 TORCH_VERSION=1.0.0 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda90
+  - PYTHON_VERSION=3.6.9 TORCH_VERSION=1.0.0 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda91
+  - PYTHON_VERSION=3.7.4 TORCH_VERSION=1.0.0 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda91
   - PYTHON_VERSION=3.6.9 TORCH_VERSION=1.0.0 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda92
   - PYTHON_VERSION=3.7.4 TORCH_VERSION=1.0.0 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda92
+  - PYTHON_VERSION=3.6.9 TORCH_VERSION=1.0.0 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda100
+  - PYTHON_VERSION=3.7.4 TORCH_VERSION=1.0.0 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda100
   - PYTHON_VERSION=3.6.9 TORCH_VERSION=1.0.0 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda101
   - PYTHON_VERSION=3.7.4 TORCH_VERSION=1.0.0 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda101
   - PYTHON_VERSION=3.6.9 TORCH_VERSION=1.0.0 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cpu
@@ -17,7 +23,7 @@ install:
   - docker exec -e PYTHON_VERSION=$PYTHON_VERSION warpctc_builder_container /bin/bash -cl \
     'pyenv global $PYTHON_VERSION'
   - docker exec warpctc_builder_container /bin/bash -cl \
-    'pip install -U pip setuptools && pip install pytest pytest-pep8 wheel'
+    'pip install -U pip setuptools && pip install pytest pytest-pep8 wheel twine'
   - docker exec -e TORCH_VERSION=$TORCH_VERSION warpctc_builder_container /bin/bash -cl \
     'pip install torch==$TORCH_VERSION torchvision'
 
@@ -33,6 +39,10 @@ script:
     'cd pytorch_binding && py.test --pep8 -m pep8 --ignore=warpctc_pytorch/_warp_ctc'
   - docker exec warpctc_builder_container /bin/bash -cl \
     'cd pytorch_binding && ls -1 dist/*.whl | awk "{print \"mv \"\$1\" \"\$1}" | sed "s/-linux_/-manylinux1_/2" | bash && ls dist/'
+  - if [ "$TRAVIS_TAG" != "" ]; then
+    docker exec warpctc_builder_container /bin/bash -cl \
+    'cd pytorch_binding && twine upload --config-file .pypirc dist/*.whl';
+    fi
 
 after_script:
   - docker stop warpctc_builder_container
