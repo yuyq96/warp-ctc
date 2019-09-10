@@ -84,20 +84,20 @@ setup(
     version="0.1.1",
     description="Pytorch Bindings for warp-ctc maintained by ESPnet",
     url="https://github.com/espnet/warp-ctc",
-    author=[
+    author=','.join([
         "Jared Casper",
         "Sean Naren",
         "Shinji Watanabe",
         "Jiro Nishitoba",
         "Yusuke Nishioka"
-    ],
-    author_email=[
+    ]),
+    author_email=','.join([
         "jared.casper@baidu.com",
         "sean.narenthiran@digitalreasoning.com",
         "sw005320@gmail.com",
         "j.nshtb+github@gmail.com",
         "yusuke.nishioka.0713@gmail.com"
-    ],
+    ]),
     license="Apache",
     packages=find_packages(),
     package_data={'': ['lib/{}'.format(warp_ctc_libname)]},
