@@ -4,6 +4,8 @@ language: python
 services:
   - docker
 env:
+  - PYTHON_VERSION=3.6.9 TORCH_VERSION=1.0.0 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda80
+  - PYTHON_VERSION=3.7.4 TORCH_VERSION=1.0.0 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda80
   - PYTHON_VERSION=3.6.9 TORCH_VERSION=1.0.0 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda90
   - PYTHON_VERSION=3.7.4 TORCH_VERSION=1.0.0 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda90
   - PYTHON_VERSION=3.6.9 TORCH_VERSION=1.0.0 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda91
