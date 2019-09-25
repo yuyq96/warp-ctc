@@ -4,20 +4,20 @@ language: python
 services:
   - docker
 env:
-  - PYTHON_VERSION=3.6.9 TORCH_VERSION=1.0.0 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda80
-  - PYTHON_VERSION=3.7.4 TORCH_VERSION=1.0.0 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda80
-  - PYTHON_VERSION=3.6.9 TORCH_VERSION=1.0.0 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda90
-  - PYTHON_VERSION=3.7.4 TORCH_VERSION=1.0.0 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda90
-  - PYTHON_VERSION=3.6.9 TORCH_VERSION=1.0.0 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda91
-  - PYTHON_VERSION=3.7.4 TORCH_VERSION=1.0.0 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda91
-  - PYTHON_VERSION=3.6.9 TORCH_VERSION=1.0.0 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda92
-  - PYTHON_VERSION=3.7.4 TORCH_VERSION=1.0.0 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda92
-  - PYTHON_VERSION=3.6.9 TORCH_VERSION=1.0.0 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda100
-  - PYTHON_VERSION=3.7.4 TORCH_VERSION=1.0.0 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda100
-  - PYTHON_VERSION=3.6.9 TORCH_VERSION=1.0.0 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda101
-  - PYTHON_VERSION=3.7.4 TORCH_VERSION=1.0.0 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda101
-  - PYTHON_VERSION=3.6.9 TORCH_VERSION=1.0.0 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cpu
-  - PYTHON_VERSION=3.7.4 TORCH_VERSION=1.0.0 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cpu
+  - PYTHON_VERSION=3.6.9 TORCH_VERSION=1.1.0 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda80
+  - PYTHON_VERSION=3.7.4 TORCH_VERSION=1.1.0 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda80
+  - PYTHON_VERSION=3.6.9 TORCH_VERSION=1.1.0 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda90
+  - PYTHON_VERSION=3.7.4 TORCH_VERSION=1.1.0 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda90
+  - PYTHON_VERSION=3.6.9 TORCH_VERSION=1.1.0 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda91
+  - PYTHON_VERSION=3.7.4 TORCH_VERSION=1.1.0 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda91
+  - PYTHON_VERSION=3.6.9 TORCH_VERSION=1.1.0 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda92
+  - PYTHON_VERSION=3.7.4 TORCH_VERSION=1.1.0 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda92
+  - PYTHON_VERSION=3.6.9 TORCH_VERSION=1.1.0 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda100
+  - PYTHON_VERSION=3.7.4 TORCH_VERSION=1.1.0 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda100
+  - PYTHON_VERSION=3.6.9 TORCH_VERSION=1.1.0 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda101
+  - PYTHON_VERSION=3.7.4 TORCH_VERSION=1.1.0 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda101
+  - PYTHON_VERSION=3.6.9 TORCH_VERSION=1.1.0 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cpu
+  - PYTHON_VERSION=3.7.4 TORCH_VERSION=1.1.0 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cpu
 before_install:
   - docker pull $DOCKER_IMAGE_NAME
   - docker run --rm -d --name warpctc_builder_container -v ${PWD}:${PWD} -w ${PWD} $DOCKER_IMAGE_NAME sleep inf
