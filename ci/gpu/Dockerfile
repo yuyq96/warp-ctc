@@ -16,6 +16,7 @@ RUN yum install -y \
     make \
     openssl-devel \
     readline-devel \
+    sqlite-devel \
     which \
     zlib-devel
 # Install pyenv
@@ -23,7 +24,7 @@ RUN git clone https://github.com/pyenv/pyenv.git /opt/pyenv
 ENV PYENV_ROOT /opt/pyenv
 ENV PATH ${PYENV_ROOT}/shims:${PYENV_ROOT}/bin:${PATH}
 # Install Python
-ENV PYTHON_VERSIONS 3.6.9 3.7.4
+ENV PYTHON_VERSIONS 3.6.12 3.7.9 3.8.5
 RUN source scl_source enable devtoolset-${devtoolset_version} \
  && for python_version in ${PYTHON_VERSIONS}; do \
       pyenv install ${python_version}; \
