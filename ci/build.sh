@@ -1,5 +1,6 @@
 #!/bin/sh
 
+YYYYMMDD=$(date '+%Y%m%d')
 image_repository=espnet/warpctc_builder
 cuda_versions=(9.2 10.0 10.1)
 for cuda_version in ${cuda_versions[@]}; do
@@ -13,6 +14,7 @@ for cuda_version in ${cuda_versions[@]}; do
   image_name=$image_repository:$image_tag
   echo "Building $image_name"
   docker build --build-arg base_image=$base_image --build-arg devtoolset_version=$devtoolset_version -t $image_name ./gpu
+  docker tag $image_name $image_name-$YYYYMMDD
   echo "Done.\n"
 done
 
@@ -20,4 +22,5 @@ image_tag=cpu
 image_name=$image_repository:$image_tag
 echo "Building $image_name"
 docker build -t $image_name ./cpu
+docker tag $image_name $image_name-$YYYYMMDD
 echo Done.
