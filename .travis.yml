@@ -55,8 +55,10 @@ before_install:
 install:
   - docker exec -e PYTHON_VERSION=$PYTHON_VERSION warpctc_builder_container /bin/bash -cl \
     'pyenv global $PYTHON_VERSION'
+  # Install pytest<5.4 because pytest-pep8 uses direct Node construction
+  # see https://docs.pytest.org/en/stable/deprecations.html#node-construction-changed-to-node-from-parent
   - docker exec warpctc_builder_container /bin/bash -cl \
-    'pip install -U pip setuptools && pip install pytest pytest-pep8 wheel twine'
+    "pip install -U pip setuptools && pip install 'pytest<5.4' pytest-pep8 wheel twine"
   - docker exec -e TORCH_VERSION=$TORCH_VERSION warpctc_builder_container /bin/bash -cl \
     'pip install torch==$TORCH_VERSION torchvision'
 
