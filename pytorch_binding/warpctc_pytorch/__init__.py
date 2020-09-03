@@ -5,7 +5,7 @@ from torch.nn import Module
 
 from ._warp_ctc import *
 
-__version__ = '0.1.1'
+__version__ = '0.1.2'
 
 
 def _assert_no_grad(tensor):

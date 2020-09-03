@@ -81,7 +81,7 @@ ext_modules = [
 
 setup(
     name=package_name,
-    version="0.1.1",
+    version="0.1.2",
     description="Pytorch Bindings for warp-ctc maintained by ESPnet",
     url="https://github.com/espnet/warp-ctc",
     author=','.join([
