@@ -3,7 +3,6 @@ import platform
 import shutil
 import sys
 from setuptools import setup, find_packages
-from subprocess import Popen, PIPE
 
 from torch.utils.cpp_extension import BuildExtension, CppExtension
 import torch
@@ -37,18 +36,6 @@ shutil.copyfile(
 )
 
 
-def get_cuda_version():
-    proc = Popen(['nvcc', '--version'], stdout=PIPE, stderr=PIPE)
-    out, err = proc.communicate()
-    out.decode('utf-8').split('\n')[-2].split(', ')[-2].split(' ')
-    return out.decode('utf-8').split()[-2][:-1].replace('.', '')
-
-
-def get_torch_version():
-    major_ver, minor_ver = torch.__version__.split('.')[:2]
-    return major_ver + minor_ver
-
-
 if torch.cuda.is_available() or "CUDA_HOME" in os.environ:
     enable_gpu = True
 else:
@@ -60,11 +47,8 @@ if enable_gpu:
 
     build_extension = CUDAExtension
     extra_compile_args += ['-DWARPCTC_ENABLE_GPU']
-    package_name = 'warpctc_pytorch{}_cuda{}'.format(
-        get_torch_version(), get_cuda_version())
 else:
     build_extension = CppExtension
-    package_name = 'warpctc_pytorch{}_cpu'.format(get_torch_version())
 
 ext_modules = [
     build_extension(
@@ -80,7 +64,7 @@ ext_modules = [
 ]
 
 setup(
-    name=package_name,
+    name="warpctc_pytorch",
     version="0.1.2",
     description="Pytorch Bindings for warp-ctc maintained by ESPnet",
     url="https://github.com/espnet/warp-ctc",

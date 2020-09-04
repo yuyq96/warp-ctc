@@ -73,7 +73,7 @@ script:
   - docker exec warpctc_builder_container /bin/bash -cl \
     'cd pytorch_binding && py.test --pep8 -m pep8 --ignore=warpctc_pytorch/_warp_ctc'
   - docker exec warpctc_builder_container /bin/bash -cl \
-    'cd pytorch_binding && ls -1 dist/*.whl | awk "{print \"mv \"\$1\" \"\$1}" | sed "s/-linux_/-manylinux1_/2" | bash && ls dist/'
+    'cd pytorch_binding && python3 wheel/rename_wheels.py && ls dist/'
   - if [ "$TRAVIS_TAG" != "" ]; then
     docker exec -e PYPI_TOKEN=$PYPI_TOKEN warpctc_builder_container /bin/bash -cl \
     'cd pytorch_binding && twine upload --config-file .pypirc -p $PYPI_TOKEN dist/*.whl';
