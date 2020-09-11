@@ -23,7 +23,7 @@ if torch.cuda.is_available() or "CUDA_HOME" in os.environ:
     enable_gpu = True
     local_version_identifier += ".cuda{}".format(get_cuda_version())
 else:
-    local_version_identifier = ".cpu"
+    local_version_identifier += ".cpu"
 
 
 for whl_path in glob.glob(os.path.join(os.getcwd(), 'dist', '*.whl')):
