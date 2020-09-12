@@ -55,10 +55,8 @@ before_install:
 install:
   - docker exec -e PYTHON_VERSION=$PYTHON_VERSION warpctc_builder_container /bin/bash -cl \
     'pyenv global $PYTHON_VERSION'
-  # Install pytest<5.4 because pytest-pep8 uses direct Node construction
-  # see https://docs.pytest.org/en/stable/deprecations.html#node-construction-changed-to-node-from-parent
   - docker exec warpctc_builder_container /bin/bash -cl \
-    "pip install -U pip setuptools && pip install 'pytest<5.4' pytest-pep8 wheel twine"
+    "pip install -U pip setuptools && pip install pytest pytest-flakes wheel twine"
   - docker exec -e TORCH_VERSION=$TORCH_VERSION warpctc_builder_container /bin/bash -cl \
     'pip install torch==$TORCH_VERSION torchvision'
 
@@ -71,7 +69,7 @@ script:
   - docker exec warpctc_builder_container /bin/bash -cl \
     'cd pytorch_binding && py.test tests'
   - docker exec warpctc_builder_container /bin/bash -cl \
-    'cd pytorch_binding && py.test --pep8 -m pep8 --ignore=warpctc_pytorch/_warp_ctc'
+    'cd pytorch_binding && py.test --flakes --ignore=warpctc_pytorch/_warp_ctc'
   - docker exec warpctc_builder_container /bin/bash -cl \
     'cd pytorch_binding && python3 wheel/rename_wheels.py && ls dist/'
   - if [ "$TRAVIS_TAG" != "" ]; then

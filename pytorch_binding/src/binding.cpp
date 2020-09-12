@@ -7,8 +7,8 @@
 
 #ifdef WARPCTC_ENABLE_GPU
 	#include "ATen/cuda/CUDAContext.h"
+	#include <c10/cuda/CUDAGuard.h>
 	#include "ATen/cuda/CUDAEvent.h"
-	#include "c10/cuda/CUDAGuard.h"
 
     #include "THC.h"
     extern THCState* state;
