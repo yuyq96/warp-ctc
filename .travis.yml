@@ -5,48 +5,30 @@ services:
   - docker
 env:
   matrix:
-    - TORCH_VERSION=1.1.0 PYTHON_VERSION=3.6.9 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda80
-    - TORCH_VERSION=1.1.0 PYTHON_VERSION=3.7.4 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda80
-    - TORCH_VERSION=1.1.0 PYTHON_VERSION=3.6.9 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda90
-    - TORCH_VERSION=1.1.0 PYTHON_VERSION=3.7.4 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda90
-    - TORCH_VERSION=1.1.0 PYTHON_VERSION=3.6.9 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda91
-    - TORCH_VERSION=1.1.0 PYTHON_VERSION=3.7.4 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda91
-    - TORCH_VERSION=1.1.0 PYTHON_VERSION=3.6.9 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda92
-    - TORCH_VERSION=1.1.0 PYTHON_VERSION=3.7.4 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda92
-    - TORCH_VERSION=1.1.0 PYTHON_VERSION=3.6.9 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda100
-    - TORCH_VERSION=1.1.0 PYTHON_VERSION=3.7.4 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda100
-    - TORCH_VERSION=1.1.0 PYTHON_VERSION=3.6.9 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda101
-    - TORCH_VERSION=1.1.0 PYTHON_VERSION=3.7.4 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda101
-    - TORCH_VERSION=1.1.0 PYTHON_VERSION=3.6.9 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cpu
-    - TORCH_VERSION=1.1.0 PYTHON_VERSION=3.7.4 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cpu
-    - TORCH_VERSION=1.2.0 PYTHON_VERSION=3.6.9 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda80
-    - TORCH_VERSION=1.2.0 PYTHON_VERSION=3.7.4 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda80
-    - TORCH_VERSION=1.2.0 PYTHON_VERSION=3.6.9 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda90
-    - TORCH_VERSION=1.2.0 PYTHON_VERSION=3.7.4 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda90
-    - TORCH_VERSION=1.2.0 PYTHON_VERSION=3.6.9 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda91
-    - TORCH_VERSION=1.2.0 PYTHON_VERSION=3.7.4 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda91
-    - TORCH_VERSION=1.2.0 PYTHON_VERSION=3.6.9 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda92
-    - TORCH_VERSION=1.2.0 PYTHON_VERSION=3.7.4 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda92
-    - TORCH_VERSION=1.2.0 PYTHON_VERSION=3.6.9 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda100
-    - TORCH_VERSION=1.2.0 PYTHON_VERSION=3.7.4 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda100
-    - TORCH_VERSION=1.2.0 PYTHON_VERSION=3.6.9 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda101
-    - TORCH_VERSION=1.2.0 PYTHON_VERSION=3.7.4 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda101
-    - TORCH_VERSION=1.2.0 PYTHON_VERSION=3.6.9 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cpu
-    - TORCH_VERSION=1.2.0 PYTHON_VERSION=3.7.4 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cpu
-    - TORCH_VERSION=1.3.1 PYTHON_VERSION=3.6.9 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda80
-    - TORCH_VERSION=1.3.1 PYTHON_VERSION=3.7.4 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda80
-    - TORCH_VERSION=1.3.1 PYTHON_VERSION=3.6.9 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda90
-    - TORCH_VERSION=1.3.1 PYTHON_VERSION=3.7.4 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda90
-    - TORCH_VERSION=1.3.1 PYTHON_VERSION=3.6.9 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda91
-    - TORCH_VERSION=1.3.1 PYTHON_VERSION=3.7.4 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda91
-    - TORCH_VERSION=1.3.1 PYTHON_VERSION=3.6.9 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda92
-    - TORCH_VERSION=1.3.1 PYTHON_VERSION=3.7.4 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda92
-    - TORCH_VERSION=1.3.1 PYTHON_VERSION=3.6.9 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda100
-    - TORCH_VERSION=1.3.1 PYTHON_VERSION=3.7.4 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda100
-    - TORCH_VERSION=1.3.1 PYTHON_VERSION=3.6.9 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda101
-    - TORCH_VERSION=1.3.1 PYTHON_VERSION=3.7.4 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda101
-    - TORCH_VERSION=1.3.1 PYTHON_VERSION=3.6.9 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cpu
-    - TORCH_VERSION=1.3.1 PYTHON_VERSION=3.7.4 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cpu
+    - TORCH_VERSION=1.1.0 PYTHON_VERSION=3.6.12 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda92
+    - TORCH_VERSION=1.1.0 PYTHON_VERSION=3.7.9 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda92
+    - TORCH_VERSION=1.1.0 PYTHON_VERSION=3.6.12 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda100
+    - TORCH_VERSION=1.1.0 PYTHON_VERSION=3.7.9 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda100
+    - TORCH_VERSION=1.1.0 PYTHON_VERSION=3.6.12 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda101
+    - TORCH_VERSION=1.1.0 PYTHON_VERSION=3.7.9 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda101
+    - TORCH_VERSION=1.1.0 PYTHON_VERSION=3.6.12 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cpu
+    - TORCH_VERSION=1.1.0 PYTHON_VERSION=3.7.9 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cpu
+    - TORCH_VERSION=1.2.0 PYTHON_VERSION=3.6.12 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda92
+    - TORCH_VERSION=1.2.0 PYTHON_VERSION=3.7.9 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda92
+    - TORCH_VERSION=1.2.0 PYTHON_VERSION=3.6.12 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda100
+    - TORCH_VERSION=1.2.0 PYTHON_VERSION=3.7.9 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda100
+    - TORCH_VERSION=1.2.0 PYTHON_VERSION=3.6.12 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda101
+    - TORCH_VERSION=1.2.0 PYTHON_VERSION=3.7.9 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda101
+    - TORCH_VERSION=1.2.0 PYTHON_VERSION=3.6.12 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cpu
+    - TORCH_VERSION=1.2.0 PYTHON_VERSION=3.7.9 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cpu
+    - TORCH_VERSION=1.3.1 PYTHON_VERSION=3.6.12 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda92
+    - TORCH_VERSION=1.3.1 PYTHON_VERSION=3.7.9 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda92
+    - TORCH_VERSION=1.3.1 PYTHON_VERSION=3.6.12 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda100
+    - TORCH_VERSION=1.3.1 PYTHON_VERSION=3.7.9 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda100
+    - TORCH_VERSION=1.3.1 PYTHON_VERSION=3.6.12 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda101
+    - TORCH_VERSION=1.3.1 PYTHON_VERSION=3.7.9 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cuda101
+    - TORCH_VERSION=1.3.1 PYTHON_VERSION=3.6.12 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cpu
+    - TORCH_VERSION=1.3.1 PYTHON_VERSION=3.7.9 DOCKER_IMAGE_NAME=espnet/warpctc_builder:cpu
   global:
     - secure: "P5iuxWY7zhu2lSXjRAikAWNDIwATrQl40TqO6z2dA2E0jBDPoewpLra6lqBDu715Tc+yFDaf/fpfKlM7sn02HGKRnapQB5N9YwI03M5AYTEQS9NvKK603LmRlpQbJZwKCzs0blgcawHmoeFjnFoz0zToWyR+kIYJvUr17T8LWNimcHTv8tVks2bnEOJYEqZKHajz1ORSQ67oV18xx755OP5w71lA0YF/Dh7bGpSamOUkUAOuCva8LKdJwM2w+r4tfhWXZDWpcgFh2WE2qPnmSkPq6jjNZJxAs//2Bn3zi3VhXjs+njuPi+cjvEfbwriVo9iwvK2OlXjygCbY3Sw8a2IeSHccEiaUgG/Ub1g3qsVn2pG6QT6xOQSAbsplPMUJBrrHZfEAxZ8uAAQ9ZkOst2TG+5lEf+0eqRDG6LXiuj2TiRGeXeUIup0MlTbPWvR9tN/aRVHuiGmGKtcklEpICM6tDK0RKlLJ5YYhx4CBXG3EpD/91hFtvhg/7y7RxZmJ+yTXD8b5CtnQdgbt86jZENsRlh/HfIAwiwosElL/ihcMLpTo/v+9ixpSCeiVxjHao3LAO2NXYyRNg/H22kfy8XDzH5dv1Dz7wQu9Z6r29DOAUDe0pH96ql3B/dfFZF282M4zpfuO4cv+0Fw178i721RKzFI+9j6GahgmUk0ZKvU="
 before_install:
@@ -55,10 +37,8 @@ before_install:
 install:
   - docker exec -e PYTHON_VERSION=$PYTHON_VERSION warpctc_builder_container /bin/bash -cl \
     'pyenv global $PYTHON_VERSION'
-  # Install pytest<5.4 because pytest-pep8 uses direct Node construction
-  # see https://docs.pytest.org/en/stable/deprecations.html#node-construction-changed-to-node-from-parent
   - docker exec warpctc_builder_container /bin/bash -cl \
-    "pip install -U pip setuptools && pip install 'pytest<5.4' pytest-pep8 wheel twine"
+    "pip install -U pip setuptools && pip install pytest pytest-flakes wheel twine"
   - docker exec -e TORCH_VERSION=$TORCH_VERSION warpctc_builder_container /bin/bash -cl \
     'pip install torch==$TORCH_VERSION torchvision'
 
@@ -71,7 +51,7 @@ script:
   - docker exec warpctc_builder_container /bin/bash -cl \
     'cd pytorch_binding && py.test tests'
   - docker exec warpctc_builder_container /bin/bash -cl \
-    'cd pytorch_binding && py.test --pep8 -m pep8 --ignore=warpctc_pytorch/_warp_ctc'
+    'cd pytorch_binding && py.test --flakes --ignore=warpctc_pytorch/_warp_ctc'
   - docker exec warpctc_builder_container /bin/bash -cl \
     'cd pytorch_binding && python3 wheel/rename_wheels.py && ls dist/'
   - if [ "$TRAVIS_TAG" != "" ]; then

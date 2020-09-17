@@ -3,7 +3,7 @@ import warpctc_pytorch as warp_ctc
 from torch.autograd import Function
 from torch.nn import Module
 
-from ._warp_ctc import *
+from ._warp_ctc import *  # noqa
 
 __version__ = '0.1.3'
 
@@ -55,8 +55,8 @@ class _CTC(Function):
 
     @staticmethod
     def backward(ctx, grad_output):
-        return ctx.grads * grad_output.to(ctx.grads.device), None, None, None, None, None, None, None
-
+        _grad_output = grad_output.to(ctx.grads.device)
+        return ctx.grads.mul_(_grad_output), None, None, None, None, None, None
 
 class CTCLoss(Module):
     """
