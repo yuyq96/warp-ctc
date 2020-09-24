@@ -29,6 +29,8 @@ else:
 for whl_path in glob.glob(os.path.join(os.getcwd(), 'dist', '*.whl')):
     whl_name = os.path.basename(whl_path)
     dist, version, python_tag, abi_tag, platform_tag = whl_name.split('-')
+    if '+' in version:
+        continue
     version += local_version_identifier
     platform_tag = platform_tag.replace('linux', 'manylinux1')
     new_whl_name = '-'.join([dist, version, python_tag, abi_tag, platform_tag])
