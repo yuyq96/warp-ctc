@@ -5,7 +5,7 @@ from torch.nn import Module
 
 from ._warp_ctc import *  # noqa
 
-__version__ = '0.1.3'
+__version__ = '0.2.0'
 
 
 def _assert_no_grad(tensor):
