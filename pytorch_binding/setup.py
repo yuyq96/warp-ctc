@@ -8,7 +8,7 @@ from subprocess import Popen, PIPE
 from torch.utils.cpp_extension import BuildExtension, CppExtension
 import torch
 
-extra_compile_args = ['-std=c++14', '-fPIC']
+extra_compile_args = ['-std=c++14', '-fPIC', '-fopenmp']
 warp_ctc_path = "../build"
 
 if platform.system() == 'Darwin':
