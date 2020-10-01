@@ -56,7 +56,7 @@ class _CTC(Function):
     @staticmethod
     def backward(ctx, grad_output):
         _grad_output = grad_output.to(ctx.grads.device)
-        return ctx.grads.mul_(_grad_output), None, None, None, None, None, None
+        return ctx.grads.mul_(_grad_output), None, None, None, None, None, None, None
 
 class CTCLoss(Module):
     """
