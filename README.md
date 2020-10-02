@@ -1,11 +1,10 @@
 # PyTorch bindings for Warp-ctc
 
-|branch|status|pypi package|
-|:-:|:-:|:-:|
-|`pytorch_bindings`|[![Build Status](https://travis-ci.org/espnet/warp-ctc.svg?branch=pytorch_bindings)](https://github.com/espnet/warp-ctc/tree/pytorch_bindings)|-|
-|`pytorch-0.4`|[![Build Status](https://travis-ci.org/espnet/warp-ctc.svg?branch=pytorch-0.4)](https://github.com/espnet/warp-ctc/tree/pytorch-0.4)|-|
-|`pytorch-1.0`|[![Build Status](https://travis-ci.org/espnet/warp-ctc.svg?branch=pytorch-1.0)](https://github.com/espnet/warp-ctc/tree/pytorch-1.0)|[![PyPI version](https://badge.fury.io/py/warpctc-pytorch10-cuda101.svg)](https://badge.fury.io/py/warpctc-pytorch10-cuda101)|
-|`pytorch-1.1`|[![Build Status](https://travis-ci.org/espnet/warp-ctc.svg?branch=pytorch-1.1)](https://github.com/espnet/warp-ctc/tree/pytorch-1.1)|[![PyPI version](https://badge.fury.io/py/warpctc-pytorch11-cuda101.svg)](https://badge.fury.io/py/warpctc-pytorch11-cuda101)|
+|branch|status|
+|:-:|:-:|
+|`pytorch_bindings`|[![Build Status](https://travis-ci.org/espnet/warp-ctc.svg?branch=pytorch_bindings)](https://github.com/espnet/warp-ctc/tree/pytorch_bindings)|
+|`pytorch-0.4`|[![Build Status](https://travis-ci.org/espnet/warp-ctc.svg?branch=pytorch-0.4)](https://github.com/espnet/warp-ctc/tree/pytorch-0.4)|
+|`pytorch-1.0`|[![Build Status](https://travis-ci.org/espnet/warp-ctc.svg?branch=pytorch-1.0)](https://github.com/espnet/warp-ctc/tree/pytorch-1.0)|
 
 This is an extension onto the original repo found [here](https://github.com/baidu-research/warp-ctc).
 
@@ -13,51 +12,35 @@ This is an extension onto the original repo found [here](https://github.com/baid
 
 Install [PyTorch](https://github.com/pytorch/pytorch#installation) first.
 
-### for PyTorch 1.2
+`warpctc-pytorch` wheel uses [local version identifiers](https://www.python.org/dev/peps/pep-0440/#local-version-identifiers),
+which has a restriction that users have to specify the version explicitly.
 
-warp-ctc does not work with PyTorch 1.2.
-Use [`torch.nn.CTCLoss`](https://pytorch.org/docs/1.2.0/nn.html#ctcloss) built in PyTorch 1.2.
+```console
+$ pip install warpctc-pytorch==X.X.X+pytorchYY.cudaZZ
+```
 
-### for PyTorch 1.0 or 1.1
+The latest version is 0.2.1 and if you work with PyTorch 1.6 and CUDA 10.2, you can run:
 
-Install `warpctc-pytorchXX-cudaYY` wheel based on PyTorch and CUDA version of your environment.
+```console
+$ pip install warpctc-pytorch==0.2.1+pytorch16.cuda102
+```
 
-```bash
-# for PyTorch 1.1 and CUDA 10.1
-$ pip install warpctc-pytorch11-cuda101
+### for PyTorch 1.4 - 1.6
 
-# for PyTorch 1.1 and CUDA 10.0
-$ pip install warpctc-pytorch11-cuda100
+`warpctc-pytorch` wheels are provided for Python 3.8, 3.7, 3.6 and CUDA 10.2, 10.1, 10.0, 9.2.
 
-# for PyTorch 1.1 and CUDA 9.2
-$ pip install warpctc-pytorch11-cuda92
+### for PyTorch 1.1 - 1.3
 
-# for PyTorch 1.1 and CUDA 9.1
-$ pip install warpctc-pytorch11-cuda91
+`warpctc-pytorch` wheels are provided for Python 3.7, 3.6 and CUDA 10.2, 10.1, 10.0, 9.2.
 
-# for PyTorch 1.1 and CUDA 9.0
-$ pip install warpctc-pytorch11-cuda90
+### for PyTorch 1.0
 
-# for PyTorch 1.1 and CUDA 8.0
-$ pip install warpctc-pytorch11-cuda80
+`warpctc-pytorch10-cudaYY` wheels are provided for Python 3.7, 3.6 and CUDA 10.1, 10.0, 9.2, 9.1, 9.0, 8.0.
 
-# for PyTorch 1.0 and CUDA 10.1
+If you work with CUDA 10.1, you can run:
+
+```console
 $ pip install warpctc-pytorch10-cuda101
-
-# for PyTorch 1.0 CUDA 10.0
-$ pip install warpctc-pytorch10-cuda100
-
-# for PyTorch 1.0 CUDA 9.2
-$ pip install warpctc-pytorch10-cuda92
-
-# for PyTorch 1.0 CUDA 9.1
-$ pip install warpctc-pytorch10-cuda91
-
-# for PyTorch 1.0 CUDA 9.0
-$ pip install warpctc-pytorch10-cuda90
-
-# for PyTorch 1.0 CUDA 8.0
-$ pip install warpctc-pytorch10-cuda80
 ```
 
 ### for PyTorch 0.4.1
@@ -82,6 +65,8 @@ $ cd ../pytorch_binding
 $ pip install numpy cffi
 $ python setup.py install
 ```
+
+## Example
 
 Example to use the bindings below.
 
