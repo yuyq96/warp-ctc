@@ -5,7 +5,7 @@ from torch.nn import Module
 
 from ._warp_ctc import *  # noqa
 
-__version__ = '0.2.0'
+__version__ = '0.2.1'
 
 
 def _assert_no_grad(tensor):
@@ -56,7 +56,7 @@ class _CTC(Function):
     @staticmethod
     def backward(ctx, grad_output):
         _grad_output = grad_output.to(ctx.grads.device)
-        return ctx.grads.mul_(_grad_output), None, None, None, None, None, None
+        return ctx.grads.mul_(_grad_output), None, None, None, None, None, None, None
 
 class CTCLoss(Module):
     """
