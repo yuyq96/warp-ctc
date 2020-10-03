@@ -16,13 +16,13 @@ Install [PyTorch](https://github.com/pytorch/pytorch#installation) first.
 which has a restriction that users have to specify the version explicitly.
 
 ```console
-$ pip install warpctc-pytorch==X.X.X+pytorchYY.cudaZZ
+$ pip install warpctc-pytorch==X.X.X+torchYY.cudaZZ
 ```
 
 The latest version is 0.2.1 and if you work with PyTorch 1.6 and CUDA 10.2, you can run:
 
 ```console
-$ pip install warpctc-pytorch==0.2.1+pytorch16.cuda102
+$ pip install warpctc-pytorch==0.2.1+torch16.cuda102
 ```
 
 ### for PyTorch 1.4 - 1.6
