@@ -44,6 +44,20 @@ def get_cuda_version():
     return out.decode('utf-8').split()[-2][:-1].replace('.', '')
 
 
+def get_torch_version():
+    major_ver, minor_ver = torch.__version__.split('.')[:2]
+    return major_ver + minor_ver
+
+
+def get_local_version_identifier(enable_gpu):
+    local_version_identifier = '+torch{}'.format(get_torch_version())
+    if enable_gpu:
+        local_version_identifier += ".cuda{}".format(get_cuda_version())
+    else:
+        local_version_identifier += ".cpu"
+    return local_version_identifier
+
+
 if torch.cuda.is_available() or "CUDA_HOME" in os.environ:
     enable_gpu = True
     # For CUDA10.1, libcublas-10-2 is installed
@@ -75,9 +89,10 @@ ext_modules = [
     )
 ]
 
+public_version_identifier = "0.2.1"
 setup(
     name="warpctc_pytorch",
-    version="0.2.1",
+    version=public_version_identifier + get_local_version_identifier(enable_gpu),
     description="Pytorch Bindings for warp-ctc maintained by ESPnet",
     url="https://github.com/espnet/warp-ctc",
     author=','.join([
