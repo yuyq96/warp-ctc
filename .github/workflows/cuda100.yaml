@@ -1,4 +1,4 @@
-name: CI
+name: CUDA 10.0
 on:
   push:
     branches:
