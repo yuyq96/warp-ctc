@@ -89,7 +89,7 @@ ext_modules = [
     )
 ]
 
-public_version_identifier = "0.2.1"
+public_version_identifier = "0.2.2"
 setup(
     name="warpctc_pytorch",
     version=public_version_identifier + get_local_version_identifier(enable_gpu),
