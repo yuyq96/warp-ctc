@@ -25,7 +25,7 @@ ENV PYENV_ROOT /opt/pyenv
 ENV PATH ${PYENV_ROOT}/shims:${PYENV_ROOT}/bin:${PATH}
 # Install Python
 SHELL ["/bin/bash", "-c"]
-ENV PYTHON_VERSIONS 3.6.12 3.7.9 3.8.5
+ENV PYTHON_VERSIONS 3.6.13 3.7.10 3.8.7 3.9.1
 RUN source scl_source enable devtoolset-9 \
  && for python_version in ${PYTHON_VERSIONS}; do \
       pyenv install ${python_version}; \
