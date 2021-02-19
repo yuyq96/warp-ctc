@@ -1,11 +1,11 @@
 FROM centos:centos7
 
-RUN yum update -y
-RUN yum install -y epel-release
-RUN yum install -y centos-release-scl \
+RUN yum update -y \
+ && yum install -y epel-release \
+ && yum install -y centos-release-scl \
  && yum install -y devtoolset-9-gcc-c++ \
- && echo 'source scl_source enable devtoolset-9' >> ~/.bash_profile
-RUN yum install -y \
+ && echo 'source scl_source enable devtoolset-9' >> ~/.bash_profile \
+ && yum install -y \
     bzip2-devel \
     cmake \
     git \
@@ -16,7 +16,9 @@ RUN yum install -y \
     readline-devel \
     sqlite-devel \
     which \
-    zlib-devel
+    zlib-devel \
+ && yum clean all \
+ && rm -rf /var/cache/yum/*
 # Install pyenv
 RUN git clone https://github.com/pyenv/pyenv.git /opt/pyenv
 ENV PYENV_ROOT /opt/pyenv
