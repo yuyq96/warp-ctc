@@ -1,6 +1,7 @@
 FROM centos:centos7
 
 RUN yum update -y
+RUN yum install -y epel-release
 RUN yum install -y centos-release-scl \
  && yum install -y devtoolset-9-gcc-c++ \
  && echo 'source scl_source enable devtoolset-9' >> ~/.bash_profile
@@ -8,6 +9,7 @@ RUN yum install -y \
     bzip2-devel \
     cmake \
     git \
+    jq \
     libffi-devel \
     make \
     openssl-devel \

@@ -5,6 +5,7 @@ ARG devtoolset_version
 ENV CUDA_HOME /usr/local/cuda
 
 RUN yum update -y
+RUN yum install -y epel-release
 RUN yum install -y centos-release-scl \
  && yum install -y devtoolset-${devtoolset_version}-gcc-c++ \
  && echo "source scl_source enable devtoolset-${devtoolset_version}" >> ~/.bash_profile
@@ -12,6 +13,7 @@ RUN yum install -y \
     bzip2-devel \
     cmake \
     git \
+    jq \
     libffi-devel \
     make \
     openssl-devel \
